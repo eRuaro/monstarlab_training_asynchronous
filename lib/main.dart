@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:monstarlab_training_asynchronous/app/services/api_service.dart';
+import 'package:monstarlab_training_asynchronous/app/services/api.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,8 +20,24 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String _responseStatus = '';
+
+  void _getData() async {
+    final apiService = APIService(api: API.sandbox());
+    final response = await apiService.getData();
+
+    setState(() {
+      _responseStatus = response.toString();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +47,12 @@ class HomePage extends StatelessWidget {
       ),
       body: Center(
         child: MaterialButton(
-          onPressed: () {
-            
+          color: Colors.blue,
+          onPressed: (){
+            _getData();
           },
           child: Text(
-            'Get Data',
+            _responseStatus,
           ),
         ),
       ),
