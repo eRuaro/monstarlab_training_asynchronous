@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:monstarlab_training_asynchronous/networking/networking.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,9 +30,7 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: MaterialButton(
           onPressed: () {
-            Networking network = Networking();
-            var ans = network.getRecommendedSongs();
-            print(ans);
+            
           },
           child: Text(
             'Get Data',
